@@ -7,9 +7,10 @@
      <LayoutFooter></LayoutFooter>
    </div>
 </template>
-<style>
-</style>
+
 <script type='babel'>
+  import  'asset/css/common.less'
+  import 'asset/fonts/iconfont.css'
   import LayoutHeader from './header/header';
   import LayoutContent from './content/content';
   import LayoutFooter from './footer/footer';
@@ -21,3 +22,6 @@
     }
   };
 </script>
+
+<style lang="less" scoped>
+</style>

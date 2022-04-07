@@ -2,7 +2,7 @@
 const egg = require('egg');
 module.exports = class IndexController extends egg.Controller {
   
-  async home() {
-    await this.ctx.render('index/index.js');
+  async index() {
+    await this.ctx.render('home/index.js');
   }
 };
