@@ -4,7 +4,7 @@
      <LayoutContent>
        <div slot='content'><slot name='main'></slot></div>
      </LayoutContent>
-     <LayoutFooter></LayoutFooter>
+     <LayoutFooter class="footer"></LayoutFooter>
    </div>
 </template>
 
@@ -24,4 +24,10 @@
 </script>
 
 <style lang="less" scoped>
+  .main{
+    min-width: 1200px;
+  }
+  .footer{
+    margin-top: 40px;
+  }
 </style>
