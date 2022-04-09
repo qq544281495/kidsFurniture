@@ -1,5 +1,5 @@
 <template>
-  <layout title="商品" description="儿童家具商城介绍" keywords="儿童家具商城关键词">
+  <layout title="商品" description="儿童家具商城商品列表" keywords="儿童家具">
     <div class="goods container">
       <div class="goods-category">
         <div class="category-title">品类<span>Category</span></div>
@@ -18,13 +18,16 @@
       </div>
       <div class="goods-show">
         <div class="goods-box">
-          <div class="goods-item" v-for="(item,index) in goodsList" :key="index">
+          <div class="goods-item" v-for="(item,index) in goodsList" :key="index" @click="toDetails(item)">
             <img :src="item.imageList" alt="">
             <p class="goods-info">
               <span>{{item.goodsTitle}}</span>
               <span style="color: red;">￥ {{(item.goodsPrice).toFixed(2)}}</span>
             </p>
-            <p class="goods-tag">{{item.goodsTag}}</p>
+            <p class="goods-tag">
+              <span>{{item.goodsTag}}</span>
+              <span :class="item.goodsStatus == '热销' ? 'hot' : 'new'">{{item.goodsStatus}}</span>
+            </p>
           </div>
         </div>
         <div style="text-align: center;">
@@ -60,7 +63,9 @@ export default {
       }
     }
   },
-  created() {
+  mounted() {
+    this.window = window;
+    this.getUrlParams()
     this.getGoodsList()
   },
   methods:{
@@ -83,8 +88,22 @@ export default {
     handleCurrentChange(value){
       this.page = value
       this.getGoodsList()
-    }
-  }
+    },
+    toDetails(value){
+      const goodsId = value.goodsId
+      window.location.href = `/details?goodsId=${goodsId}`
+    },
+    getUrlParams(){
+      if(window.location.search){
+        let url = decodeURIComponent(window.location.search).substr(1).split('&')
+        let kidsIndex = new Object();
+        url.forEach(function(item){
+            kidsIndex[item.split('=')[0]] = item.split('=')[1]; 
+        })
+        this.categoryIndex = kidsIndex.categoryIndex
+      }
+    },
+  },
 }
 </script>
 
@@ -138,6 +157,7 @@ export default {
         display: flex;
         flex-wrap: wrap;
         .goods-item{
+            cursor: pointer;
             box-sizing: border-box;
             width: 23%;
             box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
@@ -157,8 +177,16 @@ export default {
             margin-top: 10px;
           }
           .goods-tag{
+            display: flex;
+            justify-content: space-between;
             color: #808285;
             margin-top: 8px;
+            .hot{
+              color: rgba(208,16,76,1)
+            }
+            .new{
+              color: rgba(27,129,62,1)
+            }
           }
         }
       }

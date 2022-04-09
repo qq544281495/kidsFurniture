@@ -1,5 +1,5 @@
 <template>
-  <layout title="热销商品" description="儿童家具商城介绍" keywords="儿童家具商城关键词">
+  <layout title="热销商品" description="儿童家具商城热销商品" keywords="儿童家具">
     <div class="goods container">
       <div class="goods-category">
         <div class="category-title">品类<span>Category</span></div>
@@ -18,7 +18,7 @@
       </div>
       <div class="goods-show">
         <div class="goods-box">
-          <div class="goods-item" v-for="(item,index) in goodsList" :key="index">
+          <div class="goods-item" v-for="(item,index) in goodsList" :key="index" @click="toDetails(item)">
             <img :src="item.imageList" alt="">
             <p class="goods-info">
               <span>{{item.goodsTitle}}</span>
@@ -83,6 +83,10 @@ export default {
     handleCurrentChange(value){
       this.page = value
       this.getGoodsList()
+    },
+    toDetails(value){
+      const goodsId = value.goodsId
+      window.location.href = `/details?goodsId=${goodsId}`
     }
   }
 }
@@ -145,10 +149,10 @@ export default {
             margin: 10px 8px;
             padding: 10px;
             height: 300px;
+            cursor: pointer;
           img{
             width: 100%;
             height: 220px;
-            cursor: pointer;
           }
           .goods-info{
             display: flex;

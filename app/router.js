@@ -15,4 +15,8 @@ module.exports = app => {
   // 新品商品页
   router.get('/new', controller.new.index)
   router.get('/new/getNewGoods', controller.new.getNewGoods)
+  // 商品详情页
+  router.get('/details', controller.goods.details)
+  router.get('/goods/getGoodsDetails', controller.goods.getGoodsDetails)
+  router.get('/goods/getRelatedGoods', controller.goods.getRelatedGoods)
 };

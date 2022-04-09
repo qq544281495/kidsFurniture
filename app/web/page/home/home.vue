@@ -3,7 +3,7 @@
     <!-- 轮播图 -->
     <el-carousel trigger="click" height="600px" style="width: 100%">
       <el-carousel-item v-for="item in carouselList" :key="item.carouselId">
-        <img :src="item.carouselUrl" alt="" style="width: 100%; height: 600px;">
+        <img @click="toDetails(item)" :src="item.carouselUrl" alt="" style="width: 100%; height: 600px;cursor: pointer;">
       </el-carousel-item>
     </el-carousel>
     <!-- 商品设计介绍 -->
@@ -92,42 +92,42 @@
     <!-- 首页商品类目展示 -->
     <div class="category category-right container">
       <div class="category-main">
-        <img src="../../asset/images/kids1.jpg" alt="">
+        <img @click="toGoods(1)" src="../../asset/images/kids1.jpg" alt="">
       </div>
       <div class="category-goods">
         <div v-for="(item,index) in childScot" :key="index" class="goods-item">
-          <img :src="item.imageList" alt="">
+          <img :src="item.imageList" alt="" @click="toDetails(item)">
         </div>
       </div>
     </div>
     <div class="category category-left container">
       <div class="category-goods">
         <div v-for="(item,index) in ChildDesk" :key="index" class="goods-item">
-          <img :src="item.imageList" alt="">
+          <img @click="toDetails(item)" :src="item.imageList" alt="">
         </div>
       </div>
       <div class="category-main">
-        <img src="../../asset/images/kids2.jpg" style="box-shadow: 0px 0px 1px #000;" alt="">
+        <img @click="toGoods(2)" src="../../asset/images/kids2.jpg" style="box-shadow: 0px 0px 1px #000;" alt="">
       </div>
     </div>
     <div class="category category-right container">
       <div class="category-main">
-        <img src="../../asset/images/kids3.jpg" alt="">
+        <img @click="toGoods(3)" src="../../asset/images/kids3.jpg" alt="">
       </div>
       <div class="category-goods">
         <div v-for="(item,index) in ChildLamp" :key="index" class="goods-item">
-          <img :src="item.imageList" alt="">
+          <img @click="toDetails(item)" :src="item.imageList" alt="">
         </div>
       </div>
     </div>
     <div class="category category-left container">
       <div class="category-goods">
         <div v-for="(item,index) in ChildOrnament" :key="index" class="goods-item">
-          <img :src="item.imageList" alt="">
+          <img @click="toDetails(item)" :src="item.imageList" alt="">
         </div>
       </div>
       <div class="category-main">
-        <img src="../../asset/images/kids4.jpg" style="box-shadow: 0px 0px 1px #000;" alt="">
+        <img @click="toGoods(4)" src="../../asset/images/kids4.jpg" style="box-shadow: 0px 0px 1px #000;" alt="">
       </div>
     </div>
   </layout>
@@ -166,6 +166,13 @@
             }
           })
         }
+      },
+      toDetails(value){
+        const goodsId = value.goodsId
+        window.location.href = `/details?goodsId=${goodsId}`
+      },
+      toGoods(value){
+        window.location.href = `/goods?categoryIndex=${value}`
       }
     },
     created(){
@@ -271,6 +278,7 @@
       flex: 1;
       border-radius: 8px 0px 0px 8px;
       img{
+        cursor: pointer;
         width: 100%;
         height: 100%;
         border-radius: 8px;
@@ -286,6 +294,7 @@
         height: 50%;
         padding: 4px;
         img{
+          cursor: pointer;
           border-radius: 4px;
           width: 100%;
           height: 100%;

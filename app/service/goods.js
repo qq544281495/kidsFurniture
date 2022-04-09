@@ -1,3 +1,5 @@
+const { not } = require('ip');
+
 const Service = require('egg').Service
 
 class HomeCategoryService extends Service {
@@ -80,6 +82,34 @@ class HomeCategoryService extends Service {
             return result
         } catch (error) {
             console.log(error);
+            return null
+        }
+    }
+    // 获取商品详情
+    async getGoodsDetails(params) {
+        const { app } = this;
+        const goodsId = params.goodsId
+        try {
+            const result = await app.mysql.get('goods', { goodsId });
+            return result
+        } catch (error) {
+            console.log(error);
+            return null
+        }
+    }
+    // 获取商品相关商品
+    async getRelatedGoods(params) {
+        const { app } = this;
+        const goodsId = params.goodsId
+        try {
+            const categoryId = (await app.mysql.get('goods', { goodsId })).categoryId;
+            let result = await app.mysql.select('goods', { where: { categoryId: categoryId },limit: 4, offset: 0 })
+            result = result.filter(item => {
+                return item.goodsId != goodsId
+            })
+            return result
+        } catch (error) {
+            console.log(err);
             return null
         }
     }

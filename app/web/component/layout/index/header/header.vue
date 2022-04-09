@@ -18,13 +18,13 @@
         <div class="header-user">
           <ul>
             <li>
-              <p @click="activeNav('user')" :class="active == 'user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
+              <p style="font-size: 21px;" @click="activeNav('user')" :class="active == 'user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
             </li>
-            <li style="padding-top: 2px;">
-              <p style="font-weight: 700;" @click="activeNav('shop')" :class="active == 'shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
+            <li>
+              <p @click="activeNav('shop')" :class="active == 'shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
             </li>
-            <li style="padding-top: 3px;">
-              <p style="font-weight: 700;" @click="activeNav('like')" :class="active == 'like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
+            <li>
+              <p @click="activeNav('like')" :class="active == 'like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
             </li>
           </ul>
         </div> 
@@ -130,6 +130,7 @@ export default {
             margin: -4px 10px 0px;
             p{
               font-size: 24px;
+              font-weight: 700;
             }
           }
         }
