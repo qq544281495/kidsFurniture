@@ -1,11 +1,11 @@
 'usestrict';
 const egg = require('egg');
-module.exports = class IndexController extends egg.Controller {
+module.exports = class HomeController extends egg.Controller {
   
   // 渲染首页
   async index() {
     const { ctx } = this;
-    await ctx.render('home/index.js');
+    await ctx.render('home/home.js');
   }
 
   // 获取轮播图

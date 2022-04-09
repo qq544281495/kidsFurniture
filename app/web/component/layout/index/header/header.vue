@@ -4,12 +4,12 @@
       <a href="#" class="header-title">Kids FURNITURE</a>
       <div class="header-content">
         <ul class="header-nav">
-          <li @click="activeNav('home')" :class="active == 'home' ? 'active' : ''">首页</li>
-          <li @click="activeNav('goods')" :class="active == 'goods' ? 'active' : ''">商品</li>
-          <li @click="activeNav('hot')" :class="active == 'hot' ? 'active' : ''">热销</li>
-          <li @click="activeNav('new')" :class="active == 'new' ? 'active' : ''">新品</li>
-          <li @click="activeNav('login')" :class="active == 'login' ? 'active' : ''">登录</li>
-          <li @click="activeNav('register')" :class="active == 'register' ? 'active' : ''">注册</li>
+          <li @click="activeNav('/')" :class="active == '/' ? 'active' : ''">首页</li>
+          <li @click="activeNav('/goods')" :class="active == '/goods' ? 'active' : ''">商品</li>
+          <li @click="activeNav('/hot')" :class="active == '/hot' ? 'active' : ''">热销</li>
+          <li @click="activeNav('/new')" :class="active == '/new' ? 'active' : ''">新品</li>
+          <li @click="activeNav('/login')" :class="active == '/login' ? 'active' : ''">登录</li>
+          <li @click="activeNav('/register')" :class="active == '/register' ? 'active' : ''">注册</li>
         </ul>
         <div class="header-search">
           <input type="text" v-model="searchInfo" />
@@ -38,15 +38,20 @@
 export default {
   data(){
     return{
-      active:'home',
+      active:'/',
       searchInfo:''
     }
   },
   methods: {
     activeNav(value){
       this.active = value
+      this.window.location.href = value
     },
   },
+  mounted(){
+    this.window = window
+    this.active = this.window.location.pathname
+  }
 }
 </script>
 

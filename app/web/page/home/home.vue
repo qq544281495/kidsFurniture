@@ -151,7 +151,6 @@
       getCarousel(){
         this.$axios.get('/home/getCarousel').then(res=>{
           if(res.status == 200){
-            console.log(res);
             this.carouselList = res.data
           }
         })
