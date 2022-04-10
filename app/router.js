@@ -1,6 +1,7 @@
 'use strict';
 module.exports = app => {
-  const { router, controller } = app;
+  const { router, controller, middleware } = app;
+  // middleware.jwt(app.config.jwt)
   // 首页
   router.get('/', controller.home.index);
   // 首页请求接口
@@ -19,4 +20,10 @@ module.exports = app => {
   router.get('/details', controller.goods.details)
   router.get('/goods/getGoodsDetails', controller.goods.getGoodsDetails)
   router.get('/goods/getRelatedGoods', controller.goods.getRelatedGoods)
+  // 登录
+  router.get('/login', controller.login.index)
+  router.post('/loginVerify', controller.login.loginVerify)
+  // 注册
+  router.get('/register', controller.register.index)
+  router.post('/addUserInfo', controller.register.addUserInfo)
 };

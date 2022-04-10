@@ -4,6 +4,24 @@ const fs = require('fs');
 module.exports = app => {
   const exports = {};
 
+  exports.security = {
+    csrf: {
+      enable: false,
+      ignoreJSON: true,
+    },
+    domainWhiteList: ['http://127.0.0.1:7001'],//允许访问接口的白名单
+  };
+  
+  // 自定义token加密条件字符串
+  exports.jwt = {
+    secret: "username" 
+  };  
+
+  exports.cors = {
+    origin:'*',
+    allowMethods: 'GET,HEAD,PUT,POST,DELETE,PATCH'
+  }
+  
   exports.siteFile = {
     '/favicon.ico': fs.readFileSync(path.join(app.baseDir, 'app/web/asset/images/favicon.ico'))
   };
@@ -31,18 +49,6 @@ module.exports = app => {
     'locals',
     'access'
   ];
-
-  exports.security = {
-    csrf: {
-      ignoreJSON: false,
-      cookieName: 'csrfToken',
-      sessionName: 'csrfToken',
-      headerName: 'x-csrf-token'
-    },
-    xframe: {
-      enable: false,
-    },
-  };
 
   // 数据库配置信息
   exports.mysql = {

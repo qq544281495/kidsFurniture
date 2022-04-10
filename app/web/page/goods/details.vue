@@ -24,7 +24,7 @@
                   <div @click="changeLike" style="font-size: 22px; font-weight: 700; cursor: pointer;" :class="like ? 'active-like' : ''" class="iconfont icon-aixin"></div>
               </div>
               <div style="margin-top: 20px;">
-                   <el-button type="warning" style="width: 200px;">加入购物</el-button>
+                   <el-button @click="addShopCart" type="warning" style="width: 200px;">加入购物</el-button>
                    <el-button type="danger" style="width: 200px;">立即购买</el-button>
               </div>
           </div>
@@ -91,6 +91,7 @@
 export default {
     data(){
         return{
+            loginJude: false,
             navIndex: 1,
             like: false,
             buyNum: 1,
@@ -137,6 +138,19 @@ export default {
         toDetails(value){
             const goodsId = value.goodsId
             window.location.href = `/details?goodsId=${goodsId}`
+        },
+        addShopCart(){
+            if(this.loginJude){
+                this.$message({
+                    message: '添加购物车成功',
+                    type: 'success',
+                })
+            }else{
+                this.$message({
+                    message: '请登录后操作',
+                    type: 'error',
+                })
+            }
         }
     },
     mounted(){
@@ -144,6 +158,9 @@ export default {
         this.getUrlParams()
         this.getGoodsDetails()
         this.getRelatedGoods()
+        if(sessionStorage.getItem('userId')){
+            this.loginJude = true;
+        }
     }
 }
 </script>

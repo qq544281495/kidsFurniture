@@ -8,23 +8,26 @@
           <li @click="activeNav('/goods')" :class="active == '/goods' ? 'active' : ''">商品</li>
           <li @click="activeNav('/hot')" :class="active == '/hot' ? 'active' : ''">热销</li>
           <li @click="activeNav('/new')" :class="active == '/new' ? 'active' : ''">新品</li>
-          <li @click="activeNav('/login')" :class="active == '/login' ? 'active' : ''">登录</li>
-          <li @click="activeNav('/register')" :class="active == '/register' ? 'active' : ''">注册</li>
+          <li v-show="!tokenJudg" @click="activeNav('/login')" :class="active == '/login' ? 'active' : ''">登录</li>
+          <li v-show="!tokenJudg" @click="activeNav('/register')" :class="active == '/register' ? 'active' : ''">注册</li>
         </ul>
-        <div class="header-search">
+        <!-- <div class="header-search">
           <input type="text" v-model="searchInfo" />
           <span class="iconfont icon-sousuo"></span>  
-        </div>
+        </div> -->
         <div class="header-user">
           <ul>
             <li>
-              <p style="font-size: 21px;" @click="activeNav('user')" :class="active == 'user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
+              <p v-show="tokenJudg" style="font-size: 21px;" @click="activeNav('user')" :class="active == 'user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
             </li>
             <li>
-              <p @click="activeNav('shop')" :class="active == 'shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
+              <p v-show="tokenJudg" @click="activeNav('shop')" :class="active == 'shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
             </li>
             <li>
-              <p @click="activeNav('like')" :class="active == 'like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
+              <p v-show="tokenJudg" @click="activeNav('like')" :class="active == 'like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
+            </li>
+            <li>
+              <a v-show="tokenJudg" @click="quitLogin()" style="font-size: 14px; line-height: 28px;" href="javascript:void(0);">退出登录</a>
             </li>
           </ul>
         </div> 
@@ -39,7 +42,8 @@ export default {
   data(){
     return{
       active:'/',
-      searchInfo:''
+      searchInfo:'',
+      tokenJudg: false,
     }
   },
   methods: {
@@ -47,8 +51,14 @@ export default {
       this.active = value
       this.window.location.href = value
     },
+    quitLogin(){
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('userId');
+      window.location.href = '/'
+    }
   },
   mounted(){
+    this.tokenJudg = Boolean(sessionStorage.getItem('token'))
     this.window = window
     this.active = this.window.location.pathname
   }
@@ -71,7 +81,7 @@ export default {
     justify-content: space-between;
     box-sizing: border-box;
     height: 90px;
-    padding: 34px 80px;
+    padding: 34px 0px 34px 80px;
     .header-title{
       position: relative;
       font-size: 18px;
@@ -131,6 +141,9 @@ export default {
             p{
               font-size: 24px;
               font-weight: 700;
+            }
+            a:hover{
+              color: #2075ff;
             }
           }
         }
