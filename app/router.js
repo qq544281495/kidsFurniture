@@ -20,10 +20,16 @@ module.exports = app => {
   router.get('/details', controller.goods.details)
   router.get('/goods/getGoodsDetails', controller.goods.getGoodsDetails)
   router.get('/goods/getRelatedGoods', controller.goods.getRelatedGoods)
+  router.post('/goods/addCollect', controller.goods.addCollect) // 添加收藏
+  router.post('/goods/deleteCollect', controller.goods.deleteCollect) // 取消收藏
+  router.post('/goods/getCollectStatus', controller.goods.getCollectStatus) // 获取商品收藏状态
   // 登录
   router.get('/login', controller.login.index)
   router.post('/loginVerify', controller.login.loginVerify)
   // 注册
   router.get('/register', controller.register.index)
   router.post('/addUserInfo', controller.register.addUserInfo)
+  // 收藏页面
+  router.get('/like', controller.like.index)
+  router.post('/getUserAllCollect', controller.like.getUserAllCollect)
 };

@@ -50,4 +50,43 @@ module.exports = class GoodsController extends egg.Controller {
             }
         }
     }
+    // 添加收藏
+    async addCollect() {
+        const { ctx } = this;
+        const params = ctx.request.body
+        const result = await ctx.service.goods.addCollect(params);
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = {
+                message: '添加收藏失败'
+            }
+        }
+    }
+    // 取消收藏
+    async deleteCollect() {
+        const { ctx } = this;
+        const params = ctx.request.body
+        const result = await ctx.service.goods.deleteCollect(params)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = {
+                message: '取消收藏失败'
+            }
+        }
+    }
+    // 获取商品收藏状态
+    async getCollectStatus() {
+        const { ctx } = this;
+        const params = ctx.request.body
+        const result = await ctx.service.goods.getCollectStatus(params)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = {
+                message: '获取商品收藏状态失败'
+            }
+        }
+    }
 }

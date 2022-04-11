@@ -91,6 +91,7 @@
 export default {
     data(){
         return{
+            userId:'',
             loginJude: false,
             navIndex: 1,
             like: false,
@@ -133,7 +134,62 @@ export default {
             this.search = searchIndex.goodsId
         },
         changeLike(){
-            this.like = !this.like
+            if(this.loginJude){
+                if(this.like){
+                    // 若该商品用户已收藏则取消收藏
+                    this.like = false
+                    this.$axios.post('/goods/deleteCollect',
+                        {
+                            userId: this.userId,
+                            goodsId: this.goodsDetail.goodsId,
+                            goodsLike: Number(this.like)
+                        }
+                    ).then(res=>{
+                        if(res.data.code == 200){
+                            this.$message({
+                                message: res.data.message,
+                                type: 'warning'
+                            })
+                        }else{
+                            this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            })
+                        }
+                    })
+                }else{
+                    // 若该商品用户未收藏则加入收藏
+                    this.like = true
+                    this.$axios.post('/goods/addCollect',
+                        {
+                            userId: this.userId,
+                            goodsId: this.goodsDetail.goodsId,
+                            goodsLike: Number(this.like)
+                        }
+                    ).then(res=>{
+                        console.log(res,'收藏');
+                        if(res.data.code == 200){
+                            this.$message({
+                                message: res.data.message,
+                                type: 'success'
+                            })
+                        }else{
+                            this.$message({
+                                message: res.data.message,
+                                type: 'error'
+                            })
+                        }
+                    })
+                }
+            }else{
+                this.$message({
+                    message: '请登录后操作',
+                    type: 'warning'
+                })
+                setTimeout(()=>{
+                    window.location.href = '/login'
+                },500)
+            }
         },
         toDetails(value){
             const goodsId = value.goodsId
@@ -148,9 +204,22 @@ export default {
             }else{
                 this.$message({
                     message: '请登录后操作',
-                    type: 'error',
+                    type: 'warning',
                 })
+                setTimeout(()=>{
+                    window.location.href = '/login'
+                },500)
             }
+        },
+        getCollectStatus(){
+            this.$axios.post('/goods/getCollectStatus',
+                {
+                    userId: this.userId,
+                    goodsId: this.search
+                }
+            ).then(res=>{
+                this.like = res.data.collect
+            })
         }
     },
     mounted(){
@@ -160,7 +229,9 @@ export default {
         this.getRelatedGoods()
         if(sessionStorage.getItem('userId')){
             this.loginJude = true;
+            this.userId = sessionStorage.getItem('userId')
         }
+        this.getCollectStatus()
     }
 }
 </script>

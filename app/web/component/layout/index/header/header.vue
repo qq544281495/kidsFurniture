@@ -1,7 +1,7 @@
 <template>
   <header>
     <div class="container header-box">
-      <a href="#" class="header-title">Kids FURNITURE</a>
+      <a href="/" class="header-title">Kids FURNITURE</a>
       <div class="header-content">
         <ul class="header-nav">
           <li @click="activeNav('/')" :class="active == '/' ? 'active' : ''">首页</li>
@@ -18,13 +18,13 @@
         <div class="header-user">
           <ul>
             <li>
-              <p v-show="tokenJudg" style="font-size: 21px;" @click="activeNav('user')" :class="active == 'user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
+              <p v-show="tokenJudg" style="font-size: 21px;" @click="activeNav('/user')" :class="active == '/user' ? 'active' : ''" class="iconfont icon-yonghuming"></p>  
             </li>
             <li>
-              <p v-show="tokenJudg" @click="activeNav('shop')" :class="active == 'shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
+              <p v-show="tokenJudg" @click="activeNav('/shop')" :class="active == '/shop' ? 'active' : ''" class="iconfont icon-gouwuche"></p>  
             </li>
             <li>
-              <p v-show="tokenJudg" @click="activeNav('like')" :class="active == 'like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
+              <p v-show="tokenJudg" @click="activeNav('/like')" :class="active == '/like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
             </li>
             <li>
               <a v-show="tokenJudg" @click="quitLogin()" style="font-size: 14px; line-height: 28px;" href="javascript:void(0);">退出登录</a>

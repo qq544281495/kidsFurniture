@@ -113,6 +113,42 @@ class HomeCategoryService extends Service {
             return null
         }
     }
+    // 添加收藏
+    async addCollect(params) {
+        const { app } = this;
+        const judg = await app.mysql.select('collect', { where: { userId: params.userId, goodsId: params.goodsId } })
+        if (judg.length == 0) {
+            const result = await app.mysql.insert('collect', params)
+            if (result.affectedRows === 1) {
+                return { code: 200, message: '收藏成功' }
+            }
+        } else {
+            const result = await app.mysql.update('collect', params, {where:{userId: params.userId, goodsId: params.goodsId}})
+            if (result.affectedRows === 1) {
+                return { code: 200, message: '收藏成功' }
+            }
+        }
+    }
+    // 取消收藏
+    async deleteCollect(params) {
+        const { app } = this;
+        const result = await app.mysql.update('collect', params, {where:{userId: params.userId, goodsId: params.goodsId}})
+        if (result.affectedRows === 1) {
+            return { code: 200, message: '取消收藏' }
+        } else {
+            return { code: 500, message: '取消收藏失败，请稍后重试'}
+        }
+    }
+    // 获取商品收藏状态
+    async getCollectStatus(params) {
+        const { app } = this;
+        const result = await app.mysql.select('collect', { where: { userId: params.userId, goodsId: params.goodsId, goodsLike: 1 } })
+        if (result.length == 0) {
+            return { collect: false };
+        } else {
+            return { collect: true };
+        }
+    }
 }
 
 module.exports = HomeCategoryService
