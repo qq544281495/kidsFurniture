@@ -15,7 +15,7 @@
             </el-tooltip>
           </div>
         </div>
-        <el-empty v-show="collectList.length == 0" image-size="900px" image="https://s2.loli.net/2022/04/10/Hacz3FjOAhLr8lD.png" description="暂无收藏商品">
+        <el-empty v-show="collectList.length == 0" image="https://s2.loli.net/2022/04/10/Hacz3FjOAhLr8lD.png" description="暂无收藏商品">
             <a class="to-goods" href="/goods">快去挑选心仪商品吧~</a>
         </el-empty>
       </div>
@@ -32,7 +32,6 @@ export default {
     },
     methods:{
         changeLike(item){
-            console.log(item,'测试');
             this.$axios.post('/goods/deleteCollect',
                 {
                     userId: this.userId,

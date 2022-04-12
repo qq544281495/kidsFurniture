@@ -27,6 +27,9 @@
               <p v-show="tokenJudg" @click="activeNav('/like')" :class="active == '/like' ? 'active' : ''" class="iconfont icon-shoucang"></p> 
             </li>
             <li>
+              <p v-show="tokenJudg" @click="activeNav('/order')" :class="active == '/order' ? 'active' : ''" class="iconfont icon-shouye"></p> 
+            </li>
+            <li>
               <a v-show="tokenJudg" @click="quitLogin()" style="font-size: 14px; line-height: 28px;" href="javascript:void(0);">退出登录</a>
             </li>
           </ul>

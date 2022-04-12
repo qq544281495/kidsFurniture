@@ -24,7 +24,7 @@
                   <div @click="changeLike" style="font-size: 22px; font-weight: 700; cursor: pointer;" :class="like ? 'active-like' : ''" class="iconfont icon-aixin"></div>
               </div>
               <div style="margin-top: 20px;">
-                   <el-button @click="addShopCart" type="warning" style="width: 200px;">加入购物</el-button>
+                   <el-button @click="addShopCart" type="warning" style="width: 200px;">加入购物车</el-button>
                    <el-button type="danger" style="width: 200px;">立即购买</el-button>
               </div>
           </div>
@@ -197,9 +197,22 @@ export default {
         },
         addShopCart(){
             if(this.loginJude){
-                this.$message({
-                    message: '添加购物车成功',
-                    type: 'success',
+                this.$axios.post('/addShopCart', {
+                    userId: this.userId,
+                    goodsId: this.goodsDetail.goodsId,
+                    goodsNum: this.buyNum
+                }).then(res=>{
+                    if(res.data.code == 200){
+                        this.$message({
+                            message: res.data.message,
+                            type: 'success'
+                        })
+                    }else{
+                        this.$message({
+                            message: res.data.message,
+                            type: 'error'
+                        })
+                    }
                 })
             }else{
                 this.$message({

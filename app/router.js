@@ -4,6 +4,8 @@ module.exports = app => {
   // middleware.jwt(app.config.jwt)
   // 首页
   router.get('/', controller.home.index);
+  // 用户中心
+  router.get('/user', controller.user.index);
   // 首页请求接口
   router.get('/home/getCarousel', controller.home.getCarousel)
   router.get('/home/getHomeCategory', controller.home.getHomeCategory)
@@ -32,4 +34,12 @@ module.exports = app => {
   // 收藏页面
   router.get('/like', controller.like.index)
   router.post('/getUserAllCollect', controller.like.getUserAllCollect)
+  // 购物车页面
+  router.get('/shop', controller.shop.index)
+  router.post('/addShopCart', controller.shop.addShopCart)
+  router.post('/getUserShop', controller.shop.getUserShop)
+  router.post('/changeShopNum', controller.shop.changeShopNum)
+  router.post('/deleteShop', controller.shop.deleteShop)
+  // 订单模块
+  router.get('/order', controller.order.index)
 };
