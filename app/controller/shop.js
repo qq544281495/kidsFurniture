@@ -58,4 +58,16 @@ module.exports = class ShopController extends egg.Controller {
             }
         }
     }
+    async getShopGoods() {
+        const { ctx } = this;
+        const params = ctx.request.body
+        const result = await ctx.service.shop.getShopGoods(params)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = {
+                message: '获取订单商品失败'
+            }
+        }
+    }
 }

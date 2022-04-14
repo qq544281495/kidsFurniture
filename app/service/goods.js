@@ -149,6 +149,17 @@ class HomeCategoryService extends Service {
             return { collect: true };
         }
     }
+    // 获取商品评价
+    async getEvaluate(params) {
+        const { app } = this;
+        try {
+            const result = await app.mysql.select('evaluate', { where: { goodsId: params.goodsId } })
+            return result
+        } catch (error) {
+            console.log(error);
+            return null
+        }
+    }
 }
 
 module.exports = HomeCategoryService

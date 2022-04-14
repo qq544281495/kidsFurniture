@@ -89,4 +89,17 @@ module.exports = class GoodsController extends egg.Controller {
             }
         }
     }
+    // 获取商品评价
+    async getEvaluate() {
+        const { ctx } = this;
+        const params = ctx.request.query
+        const result = await ctx.service.goods.getEvaluate(params)
+        if (result) {
+            ctx.body = result
+        } else {
+            ctx.body = {
+                message: '获取商品评价失败'
+            }
+        }
+    }
 }

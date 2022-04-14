@@ -25,7 +25,7 @@
               </div>
               <div style="margin-top: 20px;">
                    <el-button @click="addShopCart" type="warning" style="width: 200px;">加入购物车</el-button>
-                   <el-button type="danger" style="width: 200px;">立即购买</el-button>
+                   <el-button type="danger" style="width: 200px;" @click="buyGoods">立即购买</el-button>
               </div>
           </div>
       </div>
@@ -81,7 +81,16 @@
                 </div>
           </div>
           <div v-show="navIndex == 3">
-              <el-empty image="https://s2.loli.net/2022/04/10/Hacz3FjOAhLr8lD.png" description="暂无评论"></el-empty>
+              <el-empty v-show="evaluateList.length == 0" image="https://s2.loli.net/2022/04/10/Hacz3FjOAhLr8lD.png" description="暂无评论"></el-empty>
+              <div v-for="item of evaluateList" :key="item.evaluateId" class="evaluate-item">
+                  <div class="evaluate-title">
+                      <span>用户ID：{{item.userId}}</span>
+                      <span>评价时间：{{item.date}}</span>
+                  </div>
+                  <div class="evaluate-info">
+                      {{item.evaluateInfo}}
+                  </div>
+              </div>
           </div>
       </div>
   </layout>
@@ -100,10 +109,19 @@ export default {
             goodsDetail: {
                 goodsInfo: {}
             },
-            relatedGoods: []
+            relatedGoods: [],
+            evaluateList: []
         }
     },
     methods: {
+        buyGoods(){
+            let goodsInfo = [{
+                goodsId: this.search,
+                goodsNum: this.buyNum
+            }]
+            goodsInfo = JSON.stringify(goodsInfo)
+            window.location.href = `/order?goodsId=${goodsInfo}`
+        },
         getGoodsDetails(){
             this.$axios.get('/goods/getGoodsDetails',{params: {goodsId:this.search}}).then(res=>{
                 if(res.status == 200){
@@ -233,6 +251,14 @@ export default {
             ).then(res=>{
                 this.like = res.data.collect
             })
+        },
+        getEvaluate(){
+            this.$axios.get('/goods/getEvaluate',{
+                params: {goodsId: this.search}
+            }).then(res=>{
+                this.evaluateList = res.data
+                console.log(this.evaluateList);
+            })
         }
     },
     mounted(){
@@ -245,6 +271,7 @@ export default {
             this.userId = sessionStorage.getItem('userId')
         }
         this.getCollectStatus()
+        this.getEvaluate()
     }
 }
 </script>
@@ -366,6 +393,21 @@ export default {
                         letter-spacing: 1px;
                     }
                 }
+            }
+        }
+        .evaluate-item{
+            box-sizing: border-box;
+            box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin: 10px 0px;
+            font-size: 14px;
+            .evaluate-title{
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+            .evaluate-info{
+                width: 50%;
             }
         }
         .related-list{
