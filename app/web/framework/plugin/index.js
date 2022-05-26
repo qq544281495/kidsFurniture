@@ -1,14 +1,14 @@
 'use strict';
 import axios from 'axios';
 import request from 'framework/network/request';
-import moment from 'moment'
+import common from 'framework/network/common'
 
 export default {
   install(Vue) {
     if (!Vue.prototype.hasOwnProperty('$request')) {
       Vue.prototype.$request = request;
       Vue.prototype.$axios = axios;
-      Vue.prototype.moment = moment;
+      Vue.prototype.$common = common;
     }
   }
 };

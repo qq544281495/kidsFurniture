@@ -7,5 +7,13 @@ module.exports = {
          less: true
        }
      ]
+  },
+  deploy: {
+    mode: 'npm', // 支持 npm, cnpm, yarn, tnpm ,
+    nodejs: true, // 是否把 node 打进 node_modules, 默认 false 
+    filename: 'test',
+    source: ['dist', 'package.json'],
+    target: './zip',
+    done(filepath) { console.log('>>filepath', filepath); }
   }
 };

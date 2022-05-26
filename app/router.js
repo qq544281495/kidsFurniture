@@ -1,7 +1,6 @@
 'use strict';
 module.exports = app => {
   const { router, controller, middleware } = app;
-  // middleware.jwt(app.config.jwt)
   // 首页
   router.get('/', controller.home.index);
   // 用户中心

@@ -14,7 +14,7 @@ class loginService extends Service {
                 token = app.jwt.sign({ email: params.email },app.config.jwt.secret,{expiresIn: '1h'});
                 result = await app.mysql.select('user',{where: {email: params.email, password: params.password} })
             }
-            if (result) {
+            if (result.length != 0) {
                 return { code: 200, result, token, message: '登录成功'}
             } else {
                 return { code: 500, message: '请重新校验登录信息'}
