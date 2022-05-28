@@ -65,6 +65,9 @@
                </div>
             </div>
          </div>
+         <el-empty v-show="userOrderList.length == 0" image="https://s2.loli.net/2022/04/10/Hacz3FjOAhLr8lD.png" description="暂无订单">
+            <a class="to-goods" href="/goods">快去挑选心仪商品吧~</a>
+        </el-empty>
       </div>
       <el-dialog
          title="商品评价"
@@ -169,6 +172,12 @@ export default {
       box-sizing: border-box;
       padding: 20px 20px 10px 20px;
       box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);
+      .to-goods{
+         font-size: 14px;
+         letter-spacing: 1px;
+         font-weight: 600;
+         color: #CB4042;
+      }
       .order-item{
          margin: 0px auto 10px;
          box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.5);

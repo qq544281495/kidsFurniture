@@ -53,11 +53,11 @@ module.exports = app => {
   // 数据库配置信息
   exports.mysql = {
     client: {
-      host: 'localhost',
+      host: '114.132.123.105',
       port: '3306',
-      user: 'root',
+      user: 'kidsFurniture',
       password: '123456',
-      database: 'kidsFurniture',
+      database: 'kidsfurniture',
     },
     // 是否加载到 app 上，默认开启
     app: true,
