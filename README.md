@@ -1,7 +1,7 @@
 # kidsFurniture
 基于easyjs中Egg + Vue + Webpack工程化项目
 
-项目中图片运用的图床地址：https://sm.ms/（纯前端小白只能借助下图床）
+项目中图片运用的图床地址（纯前端小白只能借助下图床）：https://sm.ms/
 
 商城首页
 
