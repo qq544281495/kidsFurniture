@@ -1,0 +1,2 @@
+INSERT INTO `user` (`userId`, `phone`, `email`, `password`, `username`, `name`, `identityNo`, `userAvatar`) VALUES (1, '18888888888', '18888888888@qq.com', '18888888888', 'Demo', '悠悠然', '360722********0016', 'https://s2.loli.net/2022/04/15/v8HRVkgOYN3qtmB.jpg');
+INSERT INTO `user` (`userId`, `phone`, `email`, `password`, `username`, `name`, `identityNo`, `userAvatar`) VALUES (2, '19999999999', '19999999999@qq.com', '19999999999', 'Test', '岳', '360722********0016', 'https://s2.loli.net/2022/04/15/v8HRVkgOYN3qtmB.jpg');

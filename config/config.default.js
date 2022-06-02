@@ -53,9 +53,9 @@ module.exports = app => {
   // 数据库配置信息
   exports.mysql = {
     client: {
-      host: '114.132.123.105',
+      host: 'localhost',
       port: '3306',
-      user: 'kidsFurniture',
+      user: 'root',
       password: '123456',
       database: 'kidsfurniture',
     },
@@ -64,8 +64,6 @@ module.exports = app => {
     // 是否加载到 agent 上，默认关闭
     agent: false,
   };
-
-  exports.commonUrl = 'http://127.0.0.1:7001/'
 
   return exports;
 };

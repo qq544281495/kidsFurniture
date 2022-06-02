@@ -1,0 +1,10 @@
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (6, 1, 1, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (7, 1, 4, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (8, 1, 5, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (9, 1, 13, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (10, 1, 14, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (11, 1, 8, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (12, 1, 28, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (13, 1, 2, 1);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (14, 1, 3, 0);
+INSERT INTO `collect` (`collectId`, `userId`, `goodsId`, `goodsLike`) VALUES (15, 1, 10, 1);
